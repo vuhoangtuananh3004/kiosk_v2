@@ -12,12 +12,11 @@ function ViewAddCategories({ nameBussiness}) {
   const categories = useSelector((state) => state.menu.categories);
   const addCategories = () => {
     let id = (categories.length == 0) ? 1 : categories.length + 1;
-    // updateMenuCategory(nameBussiness, menu)
     let temp = (nameBussiness + '_' + categoryName).toLocaleUpperCase();
     addMenuCategories({ nameBussinessMenu: temp,model: {nameBussiness: nameBussiness,  id: new Date().getTime(), model:{}, categoryName: categoryName.toLocaleUpperCase()}});
   };
   return (
-    <div className="flex h-full w-full justify-center items-center">
+    <div className="flex h-3/4 w-full justify-center items-center">
       <div className="flex flex-col h-3/4 w-2/3 bg-slate-900/60 rounded-[24px] p-5 text-center overflow-scroll divide-y divide-dashed">
         <div className="h-4/5 w-full"><ViewCategories value={categories}/></div>
         <div className="flex h-1/5 w-full justify-center items-center space-x-10">

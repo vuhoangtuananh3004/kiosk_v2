@@ -60,10 +60,31 @@ export const deleteMenuCategory = async (docName) => {
 }
 export const dataChange = (nameBussiness) => {
   const q = query(collection(db, "categories"), where("nameBussiness", "==", nameBussiness)); 
-  onSnapshot(q, (querySnapshot) => {
-    
+  onSnapshot(q, (querySnapshot) => {  
     return true;
   });
   return false;
 }
+export const saveModelToDataBase = async (nameCategory, sectionToppings) => {
+  const frankDocRef = doc(db, "categories", nameCategory);
+  await updateDoc(frankDocRef, {
+    "model" : sectionToppings
+});
+  console.log("save");
+}
+
+export const saveItemToDataBase = async (nameBussinessCategory, item) => {
+await setDoc(
+  doc(db, "menus", nameBussinessCategory),
+  item
+);
+console.log("Success");
+}
+
+export const getMenu = async (nameBussinessCategory) => {
+
+  const q = query(collection(db, "menus"), where("category", "==", nameBussinessCategory)); 
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc=>doc.data())
+};
 

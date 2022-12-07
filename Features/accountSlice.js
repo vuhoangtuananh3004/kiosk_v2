@@ -31,8 +31,9 @@ export const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    reload: (state, action) => {
-     
+    logOut: (state, action) => {
+      state.user = null;
+      state.userLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -45,6 +46,6 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { reload } = accountSlice.actions;
+export const { logOut } = accountSlice.actions;
 
 export default accountSlice.reducer;

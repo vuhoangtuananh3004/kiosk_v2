@@ -39,12 +39,13 @@ function MainPage() {
         dispatch(getMenuCategories(user.nameBussiness))
       });
     }
-  },[user])
-
+  },[dispatch, user])
+  
+  if (!user) return <>Loading....</>
 
   return (
     <FullScreen handle={handle}>
-      <div className="flex flex-col h-screen w-screen text-white">
+      <div className="flex flex-col h-screen w-screen text-white overflow-auto">
         <NavBarContext.Provider
           value={{ openNavBarSlide, setNavBarSlide, setView }}
         >
@@ -55,8 +56,7 @@ function MainPage() {
           <div className="flex flex-row justify-between h-full w-full">
             <div className="flex flex-col h-full w-3/4">
               <MenuSlide />
-              <ViewMenuCategory view={view}/>
-              {view === viewAddMenuSection ? <ViewAddCategories nameBussiness={user.nameBussiness}/> : <></>}
+              {view === viewAddMenuSection ? <ViewAddCategories nameBussiness={user.nameBussiness}/> : (view) ? <ViewMenuCategory view={view} nameBussiness={user.nameBussiness}/> : <></>}
             </div>
             <div className="flex h-full w-1/4">
               <OrderShow />
