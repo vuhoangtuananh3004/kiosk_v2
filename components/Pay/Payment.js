@@ -8,6 +8,7 @@ import {
 } from "../../Features/orderSlice";
 import { doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import db from "../../firebaseConfig";
+import PaymentSuccessfull from "./PaymentSuccessfull";
 function Payment({ setPayMode }) {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
@@ -61,14 +62,15 @@ function Payment({ setPayMode }) {
       dispatch(
         makePayment({
           bussiness: user.nameBussiness,
-          order: { ...order, paymentInfo: {...paymentInfo, date: date} },
+          order: { ...order, paymentInfo: { ...paymentInfo, date: date } },
         })
       );
       setPaymentStatus(true);
     }
   };
 
-  const close = (e) => {ß
+  const close = (e) => {
+    ß;
     e.preventDefault();
     // dispatch(cancelOrder());
     setPaymentStatus(false);
@@ -144,29 +146,11 @@ function Payment({ setPayMode }) {
             </div>
           </div>
         </div>
-      ) : !isLoading ? (
-        <div className="flex flex-col h-full w-full justify-center items-center text-black z-40">
-          <div className="flex flex-col h-[300px] w-[600px] justify-center font-bold space-y-5">
-            <span className="text-[36px] tracking-widest">
-              PAYMENT SUCCESSFULL
-            </span>
-            <span>Customer name: {paymentInfo.name}</span>
-            
-            <span>ETA: ready in 25 minutes</span>
-          </div>
-          <button
-            className="text-[24px] pl-5 pr-5 border border-black rounded-[24px] bg-green-500"
-            onClick={close}
-          >
-            DONE
-          </button>
-        </div>
       ) : (
-        <>asd</>
+        <PaymentSuccessfull setPayMode={setPayMode} paymentInfo={paymentInfo} order={order}/>
       )}
     </div>
   );
 }
 
 export default Payment;
-// <span>Order number: {order.orderNum}</span>
