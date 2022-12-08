@@ -70,7 +70,7 @@ function Payment({ setPayMode }) {
 
   const done = (e) => {
     e.preventDefault();
-    dispatch(cancelOrder());
+    // dispatch(cancelOrder());
     setPayMode(false);
   };
   return (
