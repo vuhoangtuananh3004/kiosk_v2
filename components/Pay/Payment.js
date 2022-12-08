@@ -151,7 +151,7 @@ function Payment({ setPayMode }) {
               PAYMENT SUCCESSFULL
             </span>
             <span>Customer name: {paymentInfo.name}</span>
-            <span>Order number: {order.orderNum}</span>
+            
             <span>ETA: ready in 25 minutes</span>
           </div>
           <button
@@ -169,3 +169,4 @@ function Payment({ setPayMode }) {
 }
 
 export default Payment;
+// <span>Order number: {order.orderNum}</span>
