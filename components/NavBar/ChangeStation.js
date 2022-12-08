@@ -14,7 +14,7 @@ function ChangeStation() {
   const dispatch = useDispatch()
   const change = (data) => {
     let path = "/makeline/" + user.nameBussiness
-    if (data == "MAKELINE") router.push(path)
+    if (data == "MAKELINE") router.push({pathname:path, query:{email: user.email, name: user.nameBussiness}})
     else dispatch(switchStation(data))
     setNavBarSlide(!openNavBarSlide)
   }
