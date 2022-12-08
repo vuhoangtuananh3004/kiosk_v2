@@ -71,7 +71,7 @@ function Payment({ setPayMode }) {
   const close = (e) => {ß
     e.preventDefault();
     // dispatch(cancelOrder());
-    setPaymentStatus(true);
+    setPaymentStatus(false);
   };
   return (
     <div className="absolute top-0 left-0 h-screen w-3/4 bg-white/70">
