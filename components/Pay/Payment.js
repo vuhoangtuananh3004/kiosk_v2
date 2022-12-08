@@ -70,8 +70,8 @@ function Payment({ setPayMode }) {
 
   const done = (e) => {
     e.preventDefault();
-    setPayMode(false);
     dispatch(cancelOrder());
+    setPayMode(false);
   };
   return (
     <div className="absolute top-0 left-0 h-screen w-3/4 bg-white/70">
