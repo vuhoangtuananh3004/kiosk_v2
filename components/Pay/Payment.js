@@ -70,9 +70,8 @@ function Payment({ setPayMode }) {
 
   const close = (e) => {
     e.preventDefault();
-    console.log("work");
     dispatch(cancelOrder());
-    setPayMode(false);
+    setPaymentStatus(true);
   };
   return (
     <div className="absolute top-0 left-0 h-screen w-3/4 bg-white/70">
@@ -163,7 +162,7 @@ function Payment({ setPayMode }) {
           </button>
         </div>
       ) : (
-        <></>
+        <>asd</>
       )}
     </div>
   );
