@@ -68,9 +68,9 @@ function Payment({ setPayMode }) {
     }
   };
 
-  const close = (e) => {
+  const close = (e) => {ß
     e.preventDefault();
-    dispatch(cancelOrder());
+    // dispatch(cancelOrder());
     setPaymentStatus(true);
   };
   return (
@@ -145,7 +145,7 @@ function Payment({ setPayMode }) {
           </div>
         </div>
       ) : !isLoading ? (
-        <div className="flex flex-col h-full w-full justify-center items-center text-black">
+        <div className="flex flex-col h-full w-full justify-center items-center text-black z-40">
           <div className="flex flex-col h-[300px] w-[600px] justify-center font-bold space-y-5">
             <span className="text-[36px] tracking-widest">
               PAYMENT SUCCESSFULL
