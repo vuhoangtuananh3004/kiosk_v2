@@ -3,15 +3,20 @@ import React, { useContext } from "react";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import OutdoorGrillIcon from '@mui/icons-material/OutdoorGrill';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { switchStation } from "../../Features/stationSlice";
 import NavBarContext from "../Context/NavBarContext";
+import { useRouter } from "next/router";
 function ChangeStation() {
   const {openNavBarSlide,setNavBarSlide} = useContext(NavBarContext)
+  const user = useSelector(state => state.account.user)
+  const router = useRouter()
   const dispatch = useDispatch()
   const change = (data) => {
+    let path = "/makeline/" + user.nameBussiness
+    if (data == "MAKELINE") router.push(path)
+    else dispatch(switchStation(data))
     setNavBarSlide(!openNavBarSlide)
-    dispatch(switchStation(data))
   }
   return (
     <div className="flex flex-col justify-center items-center h-full w-full space-y-5">
