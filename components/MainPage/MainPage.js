@@ -10,7 +10,7 @@ import NavBarSlide from "../NavBar/NavBarSlide";
 import NavBarContext from "../Context/NavBarContext";
 import MenuSlide from "../Menu/MenuSlide";
 import ViewAddCategories from "../View/ViewAddCategories";
-import { getMenuCategories } from "../../Features/menuSlice";
+import { getMenuCategories, reload } from "../../Features/menuSlice";
 import { dataChange } from "../../firebaseFunction";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import db from "../../firebaseConfig"
@@ -39,7 +39,7 @@ function MainPage() {
         dispatch(getMenuCategories(user.nameBussiness))
       });
     }
-  },[dispatch, user])
+  },[dispatch, isLoading, user])
   
   if (!user) return <>Loading....</>
 
@@ -56,7 +56,7 @@ function MainPage() {
           <div className="flex flex-row justify-between h-full w-full">
             <div className="flex flex-col h-full w-3/4">
               <MenuSlide />
-              {view === viewAddMenuSection ? <ViewAddCategories nameBussiness={user.nameBussiness}/> : (view) ? <ViewMenuCategory view={view} nameBussiness={user.nameBussiness}/> : <></>}
+              {view === viewAddMenuSection ? <ViewAddCategories nameBussiness={user.nameBussiness}/> : (view) ? <ViewMenuCategory view={view} setView={setView} nameBussiness={user.nameBussiness}/> : <></>}
             </div>
             <div className="flex h-full w-1/4">
               <OrderShow />

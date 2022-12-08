@@ -7,33 +7,45 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import ItemPrice from "./ItemPrice";
 import ToppingItem from "./ToppingItem";
 import { useDispatch, useSelector } from "react-redux";
-import { resetState, setImg, setName } from "../../Features/itemSlice";
+import {
+  resetState,
+  setImg,
+  setName,
+  updateModel,
+} from "../../Features/itemSlice";
 import { saveItemToDataBase } from "../../firebaseFunction";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import db from "../../firebaseConfig";
+import { reload } from "../../Features/menuSlice";
 
-function CreateItem({ setItemMode, view }) {
+function CreateItem({ setItemMode, view, setView }) {
   const [imgUrl, setImgUrl] = useState();
   const [imgUrlMode, setImgUrlMode] = useState(true);
   const [itemName, setItemName] = useState();
   const [itemNameMode, setItemNameMode] = useState(true);
+  const user = useSelector((state) => state.account.user);
   const dispatch = useDispatch();
-  const model = useSelector(state => state.item.itemModel)
-
+  const model = useSelector((state) => state.item.itemModel);
   const setReduxImgUrl = () => {
-    dispatch(setImg(imgUrl))
-    setImgUrlMode(!imgUrlMode)
-  }
+    dispatch(setImg(imgUrl));
+    setImgUrlMode(!imgUrlMode);
+  };
   const setReduxItemName = () => {
-     let categoryBussinessName = view.nameBussiness + view.categoryName;
-     dispatch(setName({name: itemName, categoryName: categoryBussinessName}))
-     setItemNameMode(!itemNameMode)
-
-  }
+    let categoryBussinessName = view.nameBussiness + view.categoryName;
+    dispatch(setName({ name: itemName, categoryName: categoryBussinessName }));
+    setItemNameMode(!itemNameMode);
+  };
   const saveTodDatabase = (e) => {
     e.preventDefault();
-    let temp = view.nameBussiness + model.name
-    saveItemToDataBase(temp, model)
-    setItemMode(false)
-  }
+    let error = 0;
+    Object.keys(model).map((key, index) => {
+      if (model[key] == "") error = error + 1;
+    });
+    if (error != 0) return alert("Please fill the empty blank, createItem_36");
+    let temp = view.nameBussiness + model.name;
+    saveItemToDataBase(temp, model);
+    setItemMode(false);
+  };
   return (
     <div className="flex flex-col h-full w-full bg-slate-900/60 divide-y divide-dashed overflow-auto">
       <span className="text-center p-2 font-bold text-[24px] tracking-widest">
@@ -93,14 +105,19 @@ function CreateItem({ setItemMode, view }) {
               </span>
             </div>
             <div className="flex flex-col h-full w-full ">
-              <ItemPrice/>
+              <ItemPrice />
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-full w-full mt-5 overflow-auto-y"><ToppingItem/></div>
+        <div className="flex flex-col h-full w-full mt-5 overflow-auto-y">
+          <ToppingItem />
+        </div>
       </div>
       <div className="flex flex-row h-[100px] w-full justify-center items-center space-x-10">
-        <span className="p-2 pl-5 pr-5 rounded-[24px] bg-green-800/90 font-bold shadow-sm shadow-white/50 cursor-pointer" onClick={saveTodDatabase}>
+        <span
+          className="p-2 pl-5 pr-5 rounded-[24px] bg-green-800/90 font-bold shadow-sm shadow-white/50 cursor-pointer"
+          onClick={saveTodDatabase}
+        >
           SAVE TO DATABASE
         </span>
         <span
@@ -115,4 +132,3 @@ function CreateItem({ setItemMode, view }) {
 }
 
 export default CreateItem;
-

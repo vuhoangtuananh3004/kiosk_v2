@@ -4,7 +4,7 @@ import { loadSectionTopping, setSectionToppings } from "../../Features/modelSlic
 import { saveModelToDataBase } from "../../firebaseFunction";
 import SetUpIngredient from "./SetUpIngredient";
 
-function SetUpModel({ setEditMode, view}) {
+function SetUpModel({ setEditMode, view, setView}) {
   const dispatch = useDispatch()
   const categories = useSelector(state => state.menu)
   const sectionToppings = useSelector(state => state.model.sectionTopping)
@@ -28,6 +28,7 @@ function SetUpModel({ setEditMode, view}) {
     e.preventDefault();
     let nameCategory = view.nameBussiness +"_" + view.categoryName;
     saveModelToDataBase(nameCategory, sectionToppings);
+    setView("")
   };
   return (
     <div className="flex flex-col h-full w-full bg-slate-900/60 overflow-auto divide-y divide-dashed">

@@ -7,21 +7,22 @@ import {
   getDocs,
   collection,
   query,
-  where,updateDoc,arrayUnion,deleteDoc,onSnapshot
+  where,updateDoc,arrayUnion,deleteDoc,onSnapshot, serverTimestamp
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 // --------------- AUTHENTICATION ---------------//
 export const userExisted = async (objUser) => {
   const docRef = doc(db, "users", objUser.email);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
+    alert("User Existed")
     return true;
   }
   return false;
 };
 export const createUserWithEmailAndPassword = async (userObj) => {
   await setDoc(doc(db, "users", userObj.email), userObj);
+  await setDoc(doc(db, "payments", userObj.nameBussiness), {name: userObj.nameBussiness, orders:[]});
 };
 export const loginUserWithEmailAndPassword = async (userObj) => {
   const q = query(
@@ -30,7 +31,7 @@ export const loginUserWithEmailAndPassword = async (userObj) => {
     where("email", "==", userObj.email)
   );
   const querySnapshot = await getDocs(q);
-  if (querySnapshot.empty) return null;
+  if (querySnapshot.empty) {alert("User name or Password invalid");return null};
   return querySnapshot.docs[0].data();
 };
 
@@ -80,11 +81,32 @@ await setDoc(
 );
 console.log("Success");
 }
-
 export const getMenu = async (nameBussinessCategory) => {
-
   const q = query(collection(db, "menus"), where("category", "==", nameBussinessCategory)); 
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map(doc=>doc.data())
 };
+export const getUpdateModel = async (nameBussiness) => {
+  console.log("Line 90");
+  const q = query(collection(db, "categories"), where("nameBussiness", "==", nameBussiness)); 
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc=>doc.data())
+};
+
+// --------------- PAYMENT ---------------//
+export const addPayment = async (order) => {
+  const docRef = doc(db, "payments", order.bussiness);
+  await updateDoc(docRef, {
+    orders: arrayUnion(order)
+});
+  console.log("Success");
+};
+
+export const getPaymentRecord = async (order) => {
+  const q = query(collection(db, "payments"), where("name", "==", order.bussiness)); 
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc=>doc.data())
+};
+
+
 

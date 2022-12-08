@@ -9,13 +9,15 @@ import DisplayMenu from "./DisplayMenu";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import db from "../../firebaseConfig";
 import { getMenus } from "../../Features/menuSlice";
-function ViewMenuCategory({ view }) {
+
+function ViewMenuCategory({ view, setView }) {
   const station = useSelector((state) => state.station.station);
   const [editMode, setEditMode] = useState(false);
   const [itemMode, setItemMode] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.account.user);
   const menu = useSelector((state) => state.menu.menu);
+  
   useEffect(() => {
     if (user) {
       const q = query(
@@ -36,9 +38,9 @@ function ViewMenuCategory({ view }) {
   return (
     <div className="flex h-full w-full p-5">
       {editMode ? (
-        <SetUpModel setEditMode={setEditMode} view={view} />
+        <SetUpModel setEditMode={setEditMode} view={view} setView={setView} />
       ) : itemMode ? (
-        <CreateItem setItemMode={setItemMode} view={view} />
+        <CreateItem setItemMode={setItemMode} view={view} setView={setView} />
       ) : (
         <div className="grid grid-cols-4 gap-4">
           {!menu ? (

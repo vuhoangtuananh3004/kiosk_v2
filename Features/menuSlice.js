@@ -13,7 +13,6 @@ export const getMenus = createAsyncThunk(
     async (nameBussinessCategory) => {
       let data = await getMenu(nameBussinessCategory)
       return data;
-   
     }
   );
 
@@ -28,7 +27,7 @@ export const menuSlice = createSlice({
   initialState,
   reducers: {
     reload: (state, action) => {
-     state.isLoading = false;
+     state.isLoading = !state.isLoading;
     },
   },
   extraReducers: (builder) => {
@@ -39,7 +38,6 @@ export const menuSlice = createSlice({
     }),
     builder.addCase(getMenus.fulfilled, (state, action) => {
       state.menu = action.payload;
-      console.log(action.payload);
       // state.menu = state.menu.sort(function (a,b) { return a.id - b.id})
       state.isLoading = true;
    })

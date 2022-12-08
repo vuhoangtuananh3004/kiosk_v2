@@ -1,16 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUserWithEmailAndPassword, loginUserWithEmailAndPassword, userExisted } from "../firebaseFunction";
+import { createUserWithEmailAndPassword, getUpdateModel, loginUserWithEmailAndPassword, userExisted } from "../firebaseFunction";
 
-
-const defaultState = {
-  itemModel: {
-     name: '',
-     imgUrl:'',
-     itemPrice: [],
-     model: {},
-     category:''
+export const updateModel = createAsyncThunk(
+  "/users/updateModel1",
+  async (nameBussiness) => {
+    let data = await getUpdateModel(nameBussiness);
+    console.log(data);
+    return data;
   }
- };
+);
 const initialState = {
  itemModel: {
     name: '',
@@ -79,9 +77,14 @@ export const itemSlice = createSlice({
     addItemPrice: (state, action) => {
       state.itemModel.itemPrice = [...state.itemModel.itemPrice, action.payload]
     },
-    updateItemPrice: (state, action) => {
-   
-    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateModel.fulfilled, (state, action) => {
+      // state.itemModel.model = {[...action.payload]}
+      // console.log(state.itemModel.model);
+      // state.menu = state.menu.sort(function (a,b) { return a.id - b.id})
+
+   })
   },
 });
 

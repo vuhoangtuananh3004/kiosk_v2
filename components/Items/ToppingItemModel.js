@@ -14,6 +14,7 @@ function ToppingItemModel({ keyValue}) {
     e.preventDefault()
     dispatch(substractItemQuantity({keyValue: keyValue, index: index}))
   }
+  if (!model) return <h2>Loading....</h2>
   return (
     <div className="grid grid-cols-4 h-full">
       {!model[keyValue] ? (

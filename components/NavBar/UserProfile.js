@@ -9,7 +9,7 @@ function UserProfile() {
       <span className="text-[48px] font-bold tracking-widest">
         WELCOME TO QUIKEAT
       </span>
-      <div class="grid grid-cols-2 place-content-center text-[36px]">
+      <div className="grid grid-cols-2 place-content-center text-[36px]">
         <span>Email:</span>
         <span>{user.email}</span>
         <span>Password:</span>

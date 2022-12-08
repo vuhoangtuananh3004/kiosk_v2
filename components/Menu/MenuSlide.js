@@ -8,7 +8,6 @@ function MenuSlide() {
   const {setView} = useContext(NavBarContext)
   const categories = useSelector((state) => state.menu.categories);
   if (!categories) return <h2>Loading....</h2>
-  console.log(categories);
   return (
     <div className="flex flex-row items-center h-[70px] w-full bg-white/80 text-black space-x-10 overflow-auto">
       {categories.map((doc) => (

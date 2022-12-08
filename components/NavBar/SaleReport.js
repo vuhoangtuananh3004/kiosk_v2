@@ -1,6 +1,23 @@
-import React from "react";
-
+import { doc, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPayment } from "../../Features/saleReportSlice";
+import db from "../../firebaseConfig";
 function SaleReport() {
+  const dispatch = useDispatch();
+  const order = useSelector((state) => state.sale.order);
+  const user = useSelector((state) => state.account.user);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (loading) {
+      dispatch(getPayment({ bussiness: user.nameBussiness }));
+      setLoading(false);
+    }
+  }, [dispatch, loading, order, user]);
+
+  console.log(order);
   return (
     <div>
       <table class="table-auto w-full">
@@ -9,23 +26,28 @@ function SaleReport() {
             <th className="w-10">Order Number</th>
             <th>Order Type</th>
             <th>Summary Order</th>
-            <th>Order Time</th>
+            <th>Order Date</th>
             <th>Total</th>
             <th>Tip</th>
             <th>Payment</th>
           </tr>
         </thead>
         <tbody className="text-center font-bold divide-y divide-dashed text-[20px]">
-          <tr className="odd:bg-green-200 h-10">
-            <td>1</td>
-            <td>Togo</td>
-            <td>1 x Pizza Combo</td>
-            <td>5:00 PM</td>
-            <td>$23.99</td>
-            <td>$2.00</td>
-            <td>Visa **13</td>
-          </tr>
-          
+          {order ? (
+            order.map((doc, index) => (
+              <tr className="odd:bg-green-200 h-10" key={index}>
+                <td>{doc.order.orderNum}</td>
+                <td>Togo</td>
+                <td>1 x Pizza Combo</td>
+                <td>{doc.order.paymentInfo.date}</td>
+                <td>${doc.order.total}</td>
+                <td>$0.00</td>
+                <td>Visa **{doc.order.paymentInfo.card.substr(doc.order.paymentInfo.card.length - 2)}</td>
+              </tr>
+            ))
+          ) : (
+            <></>
+          )}
         </tbody>
       </table>
     </div>
