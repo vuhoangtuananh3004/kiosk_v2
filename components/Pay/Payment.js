@@ -68,8 +68,9 @@ function Payment({ setPayMode }) {
     }
   };
 
-  const done = (e) => {
+  const close = (e) => {
     e.preventDefault();
+    console.log("work");
     dispatch(cancelOrder());
     setPayMode(false);
   };
@@ -156,7 +157,7 @@ function Payment({ setPayMode }) {
           </div>
           <button
             className="text-[24px] pl-5 pr-5 border border-black rounded-[24px] bg-green-500"
-            onClick={done}
+            onClick={close}
           >
             DONE
           </button>
