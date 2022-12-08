@@ -71,7 +71,6 @@ function Payment({ setPayMode }) {
   const done = (e) => {
     e.preventDefault();
     dispatch(cancelOrder());
-    setPaymentStatus(false)
     setPayMode(false);
   };
   return (
@@ -134,7 +133,7 @@ function Payment({ setPayMode }) {
                   />
                 </div>
               </div>
-              <div className="flex w-full justify-center">
+              <div className="flex w-full justify-center z-50">
                 <button
                   className="flex justify-center items-center w-[200px] p-4 border border-black rounded-[24px] bg-green-500/60 font-bold tracking-widest"
                   onClick={pay}
