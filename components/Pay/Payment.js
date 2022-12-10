@@ -59,6 +59,7 @@ function Payment({ setPayMode }) {
     });
     if (errors != 0) return alert("Invalid Card Info");
     else {
+      console.log(order.orderNum);
       dispatch(
         makePayment({
           bussiness: user.nameBussiness,
@@ -69,12 +70,6 @@ function Payment({ setPayMode }) {
     }
   };
 
-  const close = (e) => {
-    ß;
-    e.preventDefault();
-    // dispatch(cancelOrder());
-    setPaymentStatus(false);
-  };
   return (
     <div className="absolute top-0 left-0 h-screen w-3/4 bg-white/70">
       {!paymentStatus ? (

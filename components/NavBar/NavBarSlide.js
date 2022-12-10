@@ -47,12 +47,7 @@ function NavBarSlide() {
           >
             {saleReport}
           </span>
-          <span
-            className="text-center w-full text-[24px] hover:font-bold tracking-wider p-4 cursor-pointer"
-            onClick={() => setOpenMenu(orderHistory)}
-          >
-            {orderHistory}
-          </span>
+
           <span
             className="text-center w-full text-[24px] hover:font-bold tracking-wider p-4 cursor-pointer"
             onClick={() => setOpenMenu(changeStation)}

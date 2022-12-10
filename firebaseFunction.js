@@ -7,7 +7,7 @@ import {
   getDocs,
   collection,
   query,
-  where,updateDoc,arrayUnion,deleteDoc,onSnapshot, serverTimestamp
+  where,updateDoc,arrayUnion,deleteDoc,onSnapshot, serverTimestamp, FieldValue, arrayRemove
 } from "firebase/firestore";
 
 // --------------- AUTHENTICATION ---------------//
@@ -22,7 +22,8 @@ export const userExisted = async (objUser) => {
 };
 export const createUserWithEmailAndPassword = async (userObj) => {
   await setDoc(doc(db, "users", userObj.email), userObj);
-  await setDoc(doc(db, "payments", userObj.nameBussiness), {name: userObj.nameBussiness, orders:[]});
+  await setDoc(doc(db, "payments", userObj.nameBussiness), {name: userObj.nameBussiness, orders:[], countTicket: 0});
+  await setDoc(doc(db, "historyOrder", userObj.nameBussiness), {name: userObj.nameBussiness, orders:[]});
 };
 export const loginUserWithEmailAndPassword = async (userObj) => {
   const q = query(
@@ -95,11 +96,16 @@ export const getUpdateModel = async (nameBussiness) => {
 
 // --------------- PAYMENT ---------------//
 export const addPayment = async (order) => {
+  let ticketNum = 1;
+  console.log(order);
+  if (order.order.orderNum !== undefined) ticketNum = order.order.orderNum
   const docRef = doc(db, "payments", order.bussiness);
+  await updateDoc(docRef, {
+    "countTicket": ticketNum,
+});
   await updateDoc(docRef, {
     orders: arrayUnion(order)
 });
-  console.log("Success");
 };
 
 export const getPaymentRecord = async (order) => {
@@ -108,5 +114,24 @@ export const getPaymentRecord = async (order) => {
   return querySnapshot.docs.map(doc=>doc.data())
 };
 
+export const getHistoryOrder = async (order) => {
+  const q = query(collection(db, "historyOrder"), where("name", "==", order.bussiness)); 
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc=>doc.data())
+};
+
+export const transferPaymentRecordToHist = async (obj) => {
+  const docRef = doc(db, "historyOrder", obj.name);
+  await updateDoc(docRef, {
+    orders: arrayUnion(obj.obj)
+});
+}
+
+export const deletePaymentRecord = async (obj) => {
+  const q = doc(db, "payments", obj.name);
+  await updateDoc(q, {
+    orders: arrayRemove(obj.obj)
+});
+}
 
 

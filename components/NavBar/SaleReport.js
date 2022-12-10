@@ -1,7 +1,7 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPayment } from "../../Features/saleReportSlice";
+import { getHistory, getPayment } from "../../Features/saleReportSlice";
 import db from "../../firebaseConfig";
 function SaleReport() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function SaleReport() {
 
   useEffect(() => {
     if (loading) {
-      dispatch(getPayment({ bussiness: user.nameBussiness }));
+      dispatch(getHistory({ bussiness: user.nameBussiness }));
       setLoading(false);
     }
   }, [dispatch, loading, order, user]);
@@ -38,7 +38,9 @@ function SaleReport() {
               <tr className="odd:bg-green-200 h-10" key={index}>
                 <td>{doc.order.orderNum}</td>
                 <td>Togo</td>
-                <td>1 x Pizza Combo</td>
+                <td className="overflow-hidden break-normal w-[300px]">
+                {doc.order.orderItems.map((data,index) => (<span className="text-sm" key={index}>{data.quantity}x{data.namePrice} {data.name}</span>))}
+                </td>
                 <td>{doc.order.paymentInfo.date}</td>
                 <td>${doc.order.total}</td>
                 <td>$0.00</td>

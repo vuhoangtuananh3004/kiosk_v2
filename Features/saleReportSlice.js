@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addPayment, getPaymentRecord } from "../firebaseFunction";
+import { addPayment, getPaymentRecord, getHistoryOrder } from "../firebaseFunction";
 
-export const getPayment = createAsyncThunk(
-  "/users/getPayments",
+export const getHistory = createAsyncThunk(
+  "/users/getPaymentsHist",
   async (order) => {
-    let data = await getPaymentRecord(order);
+    let data = await getHistoryOrder(order)
     return data;
   }
 );
@@ -23,9 +23,8 @@ export const saleReportSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getPayment.fulfilled, (state, action) => {  
-      // console.log(action.payload);
-      if(action.payload.length != 0) state.order= action.payload[0].orders
+    builder.addCase(getHistory.fulfilled, (state, action) => {  
+      if(action.payload.length != 0) state.order= action.payload[0].orders.sort(function (a,b) { return a.order.orderNum - b.order.orderNum })
     });
   },
 });

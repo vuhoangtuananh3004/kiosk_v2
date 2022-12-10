@@ -22,7 +22,6 @@ const defaultState = {
     orderItems: [],
     subTotal: 0.0,
     paymentInfo: "",
-    status: "Pending",
     total: 0,
     saleTax: 10.25,
   },
@@ -34,7 +33,6 @@ const initialState = {
     orderItems: [],
     subTotal: 0.0,
     paymentInfo: "",
-    status: "Pending",
     total: 0,
     saleTax: 10.25,
   },
@@ -63,7 +61,13 @@ export const orderSlice = createSlice({
       state.order.status = "successfull";
     });
     builder.addCase(getPayment.fulfilled, (state, action) => {  
-        state.order.orderNum = action.payload[0].orders.length + 1
+    
+      let count = action.payload[0].countTicket + 1
+      // let tempLength = action.payload[0].orders.length
+      // if (tempLength == 0) state.order.orderNum = 1;
+      // else state.order.orderNum = action.payload[0].orders[tempLength - 1].order.orderNum + 1
+      state.order.orderNum = count
+     
        
 
 

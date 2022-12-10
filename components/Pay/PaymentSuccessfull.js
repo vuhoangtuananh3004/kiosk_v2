@@ -14,7 +14,7 @@ function PaymentSuccessfull({setPayMode,paymentInfo,order}) {
       <div className="flex flex-col h-[300px] w-[600px] justify-center font-bold space-y-5">
         <span className="text-[36px] tracking-widest">PAYMENT SUCCESSFULL</span>
         <span>Customer name: {paymentInfo.name}</span>
-        <span>Order number: {order.orderNum}</span>
+        <span>Order number: {order.orderNum - 1}</span>
         <span>ETA: ready in 25 minutes</span>
       </div>
       <button
