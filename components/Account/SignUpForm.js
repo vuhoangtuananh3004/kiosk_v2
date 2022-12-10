@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUserWithEmailAndPass } from "../../Features/accountSlice";
+import { createUserWithEmailAndPass, logOut } from "../../Features/accountSlice";
 import { addMenuCategories } from "../../firebaseFunction";
 import AccountContext from "../Context/AccountContext";
 
@@ -14,13 +14,14 @@ function SignUpForm() {
   useEffect(()=> {
     if (isSignUp){
         alert("create success")
+        dispatch(logOut())
         setBtnSwitchForm("LOGIN")
     }
-  },[isSignUp, nameBussiness, setBtnSwitchForm])
+  },[dispatch, isSignUp, nameBussiness, setBtnSwitchForm])
   const signUp = (e) => {
     e.preventDefault();
     if (!email || !pwd || !nameBussiness) return alert("Please fill the blank")
-    dispatch(createUserWithEmailAndPass({email: email, pwd: pwd, nameBussiness: nameBussiness}))
+    dispatch(createUserWithEmailAndPass({email: email, pwd: pwd, nameBussiness: nameBussiness.toUpperCase()}))
     console.log("work");
   }
   console.log(isSignUp);
