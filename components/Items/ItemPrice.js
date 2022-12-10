@@ -31,11 +31,13 @@ function ItemPrice() {
         <input
           className="text-center w-[100px] rounded-[24px] text-white bg-white/40"
           placeholder="item price"
+          type="number"
           onChange={(e) =>  setPriceItem({ ...priceItem, price: e.target.value })}
         />
         <input
         className="text-center w-[100px] rounded-[24px] text-white bg-white/40"
         placeholder="extra price"
+        type="number"
         onChange={(e) =>  setPriceItem({ ...priceItem, extraPrice: e.target.value })}
       />
         <button className="pl-2 pr-2 bg-green-600 rounded-[24px]" onClick={add}>

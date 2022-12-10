@@ -74,6 +74,9 @@ export const saveModelToDataBase = async (nameCategory, sectionToppings) => {
 });
   console.log("save");
 }
+export const deleteItem = async (name) => {
+  await deleteDoc(doc(db, "menus", name));
+}
 
 export const saveItemToDataBase = async (nameBussinessCategory, item) => {
 await setDoc(
