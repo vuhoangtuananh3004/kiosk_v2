@@ -5,15 +5,18 @@ import { addItemPrice, resetPrice } from "../../Features/itemSlice";
 function ItemPrice() {
   const dispatch = useDispatch()
   const item = useSelector(state => state.item.itemModel.itemPrice)
+  // Item price is an object include namePrice, price, extra price
   const [priceItem, setPriceItem] = useState({
     namePrice: null,
     price: 0,
     extraPrice: 0,
   });
-
+// add item price to redux store, which include the same model as item name and item url ( update an object)
   const add = () => {
    dispatch(addItemPrice(priceItem))
   };
+// reset the price if need, ex: pizza have small, medium, large ==> we can reset the size price and remake the new one
+// Then set all value in redux item store to default
   const reset = (e) => {
     e.preventDefault()
     dispatch(resetPrice())

@@ -9,14 +9,14 @@ function SetUpModel({ setEditMode, view, setView}) {
   const categories = useSelector(state => state.menu)
   const sectionToppings = useSelector(state => state.model.sectionTopping)
   const [ingredient, setIngredient] = useState();
-
+// load model base on category was selected
   useEffect(()=>{
     if (categories.isLoading){
         let temp = {...categories.categories.filter(el => el.categoryName == view.categoryName)}
          dispatch(loadSectionTopping(temp[0].model))
     }
   },[categories, dispatch, view.categoryName])
-
+// add new Section/Category
   const addSection = (e) => {
     console.log(sectionToppings);
     e.preventDefault();
@@ -24,6 +24,7 @@ function SetUpModel({ setEditMode, view, setView}) {
     obj[ingredient] = [];
     dispatch(setSectionToppings(obj))
   };
+  // after add then save to database
   const saveToDatabase = (e) => {
     e.preventDefault();
     let nameCategory = view.nameBussiness +"_" + view.categoryName;

@@ -6,6 +6,7 @@ import MenuAddSection from "./MenuAddSection";
 function MenuSlide() {
   const station = useSelector(state => state.station.station)
   const {setView} = useContext(NavBarContext)
+  // If the station is select to manager view ==> the edit mode will be display
   const categories = useSelector((state) => state.menu.categories);
   if (!categories) return <h2>Loading....</h2>
   return (

@@ -9,7 +9,7 @@ function SaleReport() {
   const user = useSelector((state) => state.account.user);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
+// Load all the report from the ticket have been done when ever SaleReport is clicked, it is not real time update ==> need to click one more time for refresh
   useEffect(() => {
     if (loading) {
       dispatch(getHistory({ bussiness: user.nameBussiness }));

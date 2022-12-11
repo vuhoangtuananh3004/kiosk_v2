@@ -4,6 +4,7 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NavBarContext from "../Context/NavBarContext";
 
 function NavBarTop(props) {
+  // Navbar top use for display time and which ipad in used for the app, beside that it will have more feature on the nav bar in furture.
   return (
     <div className="flex justify-between items-center h-[100px] w-full bg-green-600/80 text-white font-bold text-[24px] shadow-xl shadow-white/10">
       <Hamburger/>

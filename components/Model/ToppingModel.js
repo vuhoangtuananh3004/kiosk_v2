@@ -6,7 +6,7 @@ import { removeToppings } from "../../Features/modelSlice";
 function ToppingModel({ keyValue,doc }) {
   const dispatch = useDispatch()
 
-
+  // Remove the topping from the model
   const remove = (e) => {
     e.preventDefault();
     dispatch(removeToppings({keyValue: keyValue, name: doc.name}))

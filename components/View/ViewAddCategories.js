@@ -5,11 +5,13 @@ import NavBarContext from "../Context/NavBarContext";
 import ViewCategories from "./ViewCategories";
 
 function ViewAddCategories({ nameBussiness}) {
+  // Display all Categories, and can add more category if needed.
   const {setView} = useContext(NavBarContext)
   const dispatch = useDispatch();
   const [categoryName, setCategoryName] = useState()
   const [nameBussinessMenu, setNameBussinessMenu] = useState("");
   const categories = useSelector((state) => state.menu.categories);
+  // add new category
   const addCategories = () => {
     let id = (categories.length == 0) ? 1 : categories.length + 1;
     let temp = (nameBussiness + '_' + categoryName).toLocaleUpperCase();

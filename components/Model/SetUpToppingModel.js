@@ -5,7 +5,7 @@ import { updateToppings } from "../../Features/modelSlice";
 function SetUpToppingModel({keyValue}) {
   const dispatch = useDispatch()
     const [toppingName, setToppingName] = useState()
-
+  // In each category will have their own model ==> add model and topping for each category
     const addTopping = (e) => {
       e.preventDefault();
       let toppingTemp ={name: toppingName, quantity: 0}

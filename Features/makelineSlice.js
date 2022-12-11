@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, deletePaymentRecord, getUpdateModel, loginUserWithEmailAndPassword, transferPaymentRecordToHist, userExisted, addPayment, getPaymentRecord } from "../firebaseFunction";
-
+// Store all function relate to make line station such as realtime load order from database.
 export const orderReady = createAsyncThunk(
   "/users/orderReady",
   async (obj) => {

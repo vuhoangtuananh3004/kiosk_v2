@@ -27,11 +27,11 @@ function MainPage() {
   const router = useRouter();
   const user = useSelector((state) => state.account.user);
 
-
+  // Whenever refresh the page, user logout ==> redirect to home page (login page)
   useEffect(() => {
     if (!user) {router.replace("/")}
   },[router, user]);
-
+//  Whenever login to the page ==> load the categories menu, and use onSnapshot for realtime update whenever, we make change to database
   useEffect(()=> {
     if (user){
       const q = query(collection(db, "categories"), where("nameBussiness", "==", user.nameBussiness)); 
@@ -41,6 +41,7 @@ function MainPage() {
     }
   },[dispatch, isLoading, user])
   
+  // if user not fully loaded ==> return loading....
   if (!user) return <>Loading....</>
 
   return (

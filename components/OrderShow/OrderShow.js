@@ -7,10 +7,12 @@ function OrderShow() {
   const dispatch = useDispatch();
   const [payMode, setPayMode] = useState(false);
   const order = useSelector((state) => state.order.order);
+  // canel order, if want to change the order.
   const cancel = (e) => {
     e.preventDefault();
     dispatch(cancelOrder());
   };
+  // Pay order is use when user completely agree with what they order, and check on price, then it will redirect to payment form.
   const pay = (e) => {
     e.preventDefault();
     if (order.total == 0) return alert("Empty cart");

@@ -16,6 +16,7 @@ function MakeLine() {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.sale.order);
 
+  // get all order from payment collection, after items were paid by customer ==> use onSnapshot for real time update whenever new customer purchase an item
   useEffect(() => {
     if (name) {
       const q = query(collection(db, "payments"), where("name", "==", name));
@@ -25,9 +26,11 @@ function MakeLine() {
     }
   }, [dispatch, name]);
   console.log(order);
+  // Ready button, send message to the database that order have been done or make ==> no longer in makeline state, it will be store to history ordder
   const ready = (data) => {
     dispatch(orderReady({name:name, obj: data}))
   }
+  // Just display when order fully loaded
   if (!order) return <h2>Loading......</h2>;
 
   return (

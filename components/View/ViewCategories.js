@@ -3,7 +3,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { deleteMenuCategory } from "../../firebaseFunction";
 
 function ViewCategories(categories) {
-
+  // The modal pop-up to show all the categories, beside that user can add, remove the category,
   const deleteDoc = (doc) => {
     let tempDoc = (doc.nameBussiness + "_" + doc.categoryName).toLocaleUpperCase()
     deleteMenuCategory(tempDoc)

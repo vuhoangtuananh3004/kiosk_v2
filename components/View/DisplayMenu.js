@@ -6,10 +6,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useSelector } from "react-redux";
 import { deleteItem } from "../../firebaseFunction";
 function DisplayMenu({ doc }) {
+  //  When an item is created it will display in menu
   const [modal, setModal] = useState(false);
   const user = useSelector(state => state.account.user)
   const station = useSelector((state) => state.station.station);
-  console.log(station);
+  // Remove an item if user want to make change
   const removeItem = (e) => {
     e.preventDefault();
     let name = user.nameBussiness + doc.name

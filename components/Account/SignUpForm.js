@@ -13,7 +13,7 @@ function SignUpForm() {
   const dispatch = useDispatch()
   useEffect(()=> {
     if (isSignUp){
-        alert("create success")
+        alert("create success, please sign in")
         dispatch(logOut())
         setBtnSwitchForm("LOGIN")
     }
@@ -22,7 +22,6 @@ function SignUpForm() {
     e.preventDefault();
     if (!email || !pwd || !nameBussiness) return alert("Please fill the blank")
     dispatch(createUserWithEmailAndPass({email: email, pwd: pwd, nameBussiness: nameBussiness.toUpperCase()}))
-    console.log("work");
   }
   console.log(isSignUp);
   return (

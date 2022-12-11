@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addMenuCategories, createUserWithEmailAndPassword, getMenu, getMenuCategory } from "../firebaseFunction";
-
+// Store all function relate to menu 'after model and item were created', get all menu from database
 export const getMenuCategories = createAsyncThunk(
     "/users/categories",
     async (nameBussiness) => {

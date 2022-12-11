@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function UserProfile() {
     const user = useSelector(state => state.account.user)
-    console.log(user);
+    // The page is used for display account information.
   return (
     <div className="flex flex-col h-full w-full justify-center items-center space-y-10">
       <span className="text-[48px] font-bold tracking-widest">

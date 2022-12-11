@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
-
+// Store all function relate to create an model, add topping, ingredients...
 const initialState = {
     sectionTopping: {},
 };

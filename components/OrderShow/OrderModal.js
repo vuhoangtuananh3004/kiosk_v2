@@ -13,16 +13,17 @@ function OrderModal({ doc, setModal }) {
   const [quantity, setQuantity] = useState(1);
   const [ingredients, setIngredients] = useState(doc.model);
   const [subTotal, setSubTotal] = useState(0)
+  // Decrease quantity of an order, ex order 2 pizza, 1 pizza.....
   const decreaseQuantity = (e) => {
     e.preventDefault()
     if (quantity > 1) setQuantity(quantity - 1)
   }
-  
+  // Get the price when it is clicked, ex: pizza small size, medium size.
   const setPrice = (data) => {
     setItem(data)
     setSize(data.price)
   }
-
+// Place an order button, finalize the price and then send it to order show.
   const order = (e) => {
     e.preventDefault()
     if (parseFloat(quantity*data.price) == 0) return alert('Please select size');

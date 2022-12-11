@@ -12,6 +12,7 @@ function ChangeStation() {
   const user = useSelector(state => state.account.user)
   const router = useRouter()
   const dispatch = useDispatch()
+  // only make line need to open the new link, because it would make it load faster, and just load what ever need for makeline.
   const change = (data) => {
     let path = "/makeline/" + user.nameBussiness
     if (data == "MAKELINE") router.push({pathname:path, query:{email: user.email, name: user.nameBussiness}})

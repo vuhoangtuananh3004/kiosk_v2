@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, getUpdateModel, loginUserWithEmailAndPassword, userExisted } from "../firebaseFunction";
-
+// Store all function relate to Item such as create Item, remove Item, load Item from database.
 export const updateModel = createAsyncThunk(
   "/users/updateModel1",
   async (nameBussiness) => {

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { cancelOrder } from "../../Features/orderSlice";
 
 function PaymentSuccessfull({setPayMode,paymentInfo,order}) {
+  // Payment successfull show that customer finish their purchase, and the pay went through.
     const dispatch = useDispatch()
     const close = (e) => {
         e.preventDefault();

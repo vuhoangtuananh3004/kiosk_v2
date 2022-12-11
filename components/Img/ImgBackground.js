@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-
+/** set background image whenever it is called */
 function ImgBackground() {
   return (
     <div className="absolute top-0 left-0 min-h-screen w-full z-[-10]">

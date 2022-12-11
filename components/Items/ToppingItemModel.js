@@ -6,14 +6,17 @@ function ToppingItemModel({ keyValue}) {
   const dispatch = useDispatch()
   const model = useSelector(state => state.item.itemModel.model)
 
+  //  add item quantity for the topping
   const add = (e, index) => {
     e.preventDefault();
     dispatch(addItemQuantity({keyValue: keyValue, index: index}))
   }
+  //  subtract item topping quantity 
   const sub = (e, index) => {
     e.preventDefault()
     dispatch(substractItemQuantity({keyValue: keyValue, index: index}))
   }
+  // Waitting for loading model from database, if it is fully loaded ==> display, otw return Loading.....
   if (!model) return <h2>Loading....</h2>
   return (
     <div className="grid grid-cols-4 h-full">

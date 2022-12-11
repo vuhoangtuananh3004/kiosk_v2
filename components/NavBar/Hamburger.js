@@ -4,7 +4,7 @@ import NavBarContext from "../Context/NavBarContext";
 
 function Hamburger() {
   const {openNavBarSlide,setNavBarSlide} = useContext(NavBarContext)
-
+  // Diplay hamburger button, and it will be open when it was selected
   const [menu, setOpenMenu] = useState(false);
   return (
     <div className="flex flex-col h-full items-center justify-center pl-10 pr-10 cursor-pointer text-white z-100">

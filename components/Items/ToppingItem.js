@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ToppingItemModel from "./ToppingItemModel";
 
 function ToppingItem() {
+  // Get model of an item from itemModel store
   const model = useSelector(state => state.item.itemModel.model)
   return (
     <div className="flex flex-col">

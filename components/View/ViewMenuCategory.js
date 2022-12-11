@@ -11,13 +11,14 @@ import db from "../../firebaseConfig";
 import { getMenus } from "../../Features/menuSlice";
 
 function ViewMenuCategory({ view, setView }) {
+  //  When all categories were add => display on the vertical bar.
   const station = useSelector((state) => state.station.station);
   const [editMode, setEditMode] = useState(false);
   const [itemMode, setItemMode] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.account.user);
   const menu = useSelector((state) => state.menu.menu);
-  
+  //  use realtime update the category whenever user add new category
   useEffect(() => {
     if (user) {
       const q = query(
@@ -30,6 +31,7 @@ function ViewMenuCategory({ view, setView }) {
     }
   }, [dispatch, user, view.categoryName, view.nameBussiness]);
 
+  // Each category have create model mode, and create item mode ==> select which mode want to be used
   const changeItemMode = () => {
     dispatch(loadItemModel(view.model));
     setItemMode(true);

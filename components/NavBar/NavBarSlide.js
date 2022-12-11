@@ -13,6 +13,7 @@ function NavBarSlide() {
   const router = useRouter()
   const dispatch = useDispatch()
   const { openNavBarSlide, setNavBarSlide } = useContext(NavBarContext);
+  // Link to each section in the navbar
   const [userProfile, saleReport, orderHistory, changeStation] = [
     "USER PROFILE",
     "SALE REPORT",
@@ -20,6 +21,7 @@ function NavBarSlide() {
     "CHANGE STATION",
   ];
   const [openMenu, setOpenMenu] = useState(userProfile);
+  // Signout and reset the user name to default null/or empty
   const signOut = (e) => {
     e.preventDefault();
     dispatch(logOut())

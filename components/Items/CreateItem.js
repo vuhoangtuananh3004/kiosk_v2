@@ -25,16 +25,21 @@ function CreateItem({ setItemMode, view, setView }) {
   const [itemNameMode, setItemNameMode] = useState(true);
   const user = useSelector((state) => state.account.user);
   const dispatch = useDispatch();
+  // Get Item model from itemSlice
   const model = useSelector((state) => state.item.itemModel);
+  // Store img url value to redux store, and use it whenever it is called
   const setReduxImgUrl = () => {
     dispatch(setImg(imgUrl));
     setImgUrlMode(!imgUrlMode);
   };
+   // Store item name value to redux store, and use it whenever it is called
   const setReduxItemName = () => {
     let categoryBussinessName = view.nameBussiness + view.categoryName;
     dispatch(setName({ name: itemName, categoryName: categoryBussinessName }));
     setItemNameMode(!itemNameMode);
   };
+  // Before store to database, double check if any information was missing => send alert if blank found, otw store it to database
+  // After store close the create item window.
   const saveTodDatabase = (e) => {
     e.preventDefault();
     let error = 0;

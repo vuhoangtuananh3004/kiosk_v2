@@ -10,6 +10,7 @@ import { doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import db from "../../firebaseConfig";
 import PaymentSuccessfull from "./PaymentSuccessfull";
 function Payment({ setPayMode }) {
+  // So far we have only one payment method is by VISA
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const user = useSelector((state) => state.account.user);
@@ -23,11 +24,11 @@ function Payment({ setPayMode }) {
     paymentType: "VISA",
   });
   let date = new Date().toLocaleDateString();
-
+  // Listen realtime update when some customer make an payment ==> can increase the ticket number.
   const unsub = onSnapshot(doc(db, "payments", user.nameBussiness), (doc) => {
     setLoading(true);
   });
-
+ // Listen realtime update when some customer make an payment ==> can increase the ticket number.
   useEffect(() => {
     if (isLoading) {
       dispatch(getPayment({ bussiness: user.nameBussiness, order: order }));
@@ -35,6 +36,8 @@ function Payment({ setPayMode }) {
     }
   }, [dispatch, isLoading, order, paymentInfo, user.nameBussiness]);
 
+  // Pay is used for validate if all information is enough and in form such as, name on card should letter, and card number should be a number
+  // After that make payment and show order detail.
   const pay = (e) => {
     e.preventDefault();
     let errors = 0;
